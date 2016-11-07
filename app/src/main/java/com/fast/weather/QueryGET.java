@@ -18,9 +18,6 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-/**
- * Created by 亲爱的~ on 2016/11/4.
- */
 public class QueryGET {
     //url参数地址定义
     private String urlRoot = "https://api.thinkpage.cn/v3";
@@ -48,28 +45,28 @@ public class QueryGET {
     }
 
     public JSONObject getWeatherNow(String location){
-        httpsUrl = urlRoot + urlFileNow + urlkey + urlLocation + location.toString() + urlLanguage + urlUnit;
+        httpsUrl = urlRoot + urlFileNow + urlkey + urlLocation + location + urlLanguage + urlUnit;
         return GetHttps(httpsUrl);
     }
     public JSONObject getWeatherDaily(String location){
-        httpsUrl = urlRoot + urlFileDaily + urlkey + urlLocation + location.toString() + urlLanguage + urlUnit + urlStart + urlDays;
+        httpsUrl = urlRoot + urlFileDaily + urlkey + urlLocation + location + urlLanguage + urlUnit + urlStart + urlDays;
         return GetHttps(httpsUrl);
     }
     public JSONObject getLifeSuggestion(String location){
-        httpsUrl = urlRoot + urlFileLifeSuggestion + urlkey + urlLocation + location.toString() + urlLanguage;
+        httpsUrl = urlRoot + urlFileLifeSuggestion + urlkey + urlLocation + location + urlLanguage;
         return GetHttps(httpsUrl);
     }
 
 
     /***
      * 获取数据
-     * @param httpsUrl
-     * @return
+     * @param httpsUrl url全地址
+     * @return Json
      */
     private JSONObject GetHttps(String httpsUrl){
-        BufferedReader reader = null;
+        BufferedReader reader;
         JSONObject result = null;
-        StringBuffer sbf = new StringBuffer();
+        StringBuilder sbf = new StringBuilder();
         try{
             URL url = new URL(httpsUrl);
             SSLContext sc = SSLContext.getInstance("TLS");
@@ -83,15 +80,14 @@ public class QueryGET {
 
             InputStream is = conn.getInputStream();
             reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            String strRead = null;
+            String strRead;
             while ((strRead = reader.readLine()) != null) {
                 sbf.append(strRead);
             }
             reader.close();
-            String str = null;
+            String str;
             str = sbf.toString();
-            result = new JSONObject(str);
-
+            result =  new JSONObject(str);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -102,7 +98,6 @@ public class QueryGET {
 
         @Override
         public boolean verify(String hostname, SSLSession session) {
-            // TODO Auto-generated method stub
             return true;
         }
     }
@@ -112,20 +107,15 @@ public class QueryGET {
         @Override
         public void checkClientTrusted(X509Certificate[] chain, String authType)
                 throws CertificateException {
-            // TODO Auto-generated method stub
-
         }
 
         @Override
         public void checkServerTrusted(X509Certificate[] chain, String authType)
                 throws CertificateException {
-            // TODO Auto-generated method stub
-
         }
 
         @Override
         public X509Certificate[] getAcceptedIssuers() {
-            // TODO Auto-generated method stub
             return null;
         }
     }
