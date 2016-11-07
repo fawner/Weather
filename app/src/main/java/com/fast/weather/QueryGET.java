@@ -18,6 +18,9 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+/**
+ * Created by 亲爱的~ on 2016/11/4.
+ */
 public class QueryGET {
     //url参数地址定义
     private String urlRoot = "https://api.thinkpage.cn/v3";
@@ -64,9 +67,9 @@ public class QueryGET {
      * @return Json
      */
     private JSONObject GetHttps(String httpsUrl){
-        BufferedReader reader;
+        BufferedReader reader = null;
         JSONObject result = null;
-        StringBuilder sbf = new StringBuilder();
+        StringBuffer sbf = new StringBuffer();
         try{
             URL url = new URL(httpsUrl);
             SSLContext sc = SSLContext.getInstance("TLS");
@@ -80,12 +83,12 @@ public class QueryGET {
 
             InputStream is = conn.getInputStream();
             reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            String strRead;
+            String strRead = null;
             while ((strRead = reader.readLine()) != null) {
                 sbf.append(strRead);
             }
             reader.close();
-            String str;
+            String str = null;
             str = sbf.toString();
             result =  new JSONObject(str);
         }catch(Exception e){
@@ -98,6 +101,7 @@ public class QueryGET {
 
         @Override
         public boolean verify(String hostname, SSLSession session) {
+            // TODO Auto-generated method stub
             return true;
         }
     }
@@ -107,15 +111,20 @@ public class QueryGET {
         @Override
         public void checkClientTrusted(X509Certificate[] chain, String authType)
                 throws CertificateException {
+            // TODO Auto-generated method stub
+
         }
 
         @Override
         public void checkServerTrusted(X509Certificate[] chain, String authType)
                 throws CertificateException {
+            // TODO Auto-generated method stub
+
         }
 
         @Override
         public X509Certificate[] getAcceptedIssuers() {
+            // TODO Auto-generated method stub
             return null;
         }
     }

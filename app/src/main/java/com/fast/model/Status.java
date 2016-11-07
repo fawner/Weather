@@ -3,6 +3,9 @@ package com.fast.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Created by 亲爱的~ on 2016/11/7.
+ */
 public class Status {
     private JSONObject json;
     private String status;
