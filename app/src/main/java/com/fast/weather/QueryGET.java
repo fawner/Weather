@@ -1,15 +1,12 @@
 package com.fast.weather;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -28,9 +25,10 @@ public class QueryGET {
     //url参数地址定义
     private String urlRoot = "https://api.thinkpage.cn/v3";
     //url访问文件定义
-    private String urlFileNow = "/weather/now.json";
-    private String urlFileDaily = "/weather/daily.json";
+    private String urlFileWeatherNow = "/weather/now.json";
+    private String urlFileWeatherDaily = "/weather/daily.json";
     private String urlFileLifeSuggestion = "/life/suggestion.json";
+    private String urlFileLocationSearch = "/location/search.json";
     //urlAPI密钥定义
     private String urlkey = "?key=ihgy05vjoxn9kqig";
     //url查询城市定义
@@ -43,6 +41,8 @@ public class QueryGET {
     private String urlStart = "&start=0";
     //url预报天数定义（可选）
     private String urlDays = "&days=5";
+    //url城市搜索q定义
+    private String urlQ = "&q=";
 
     private String httpsUrl = "";
 
@@ -51,18 +51,21 @@ public class QueryGET {
     }
 
     public JSONObject getWeatherNow(String location){
-        httpsUrl = urlRoot + urlFileNow + urlkey + urlLocation + location + urlLanguage + urlUnit;
+        httpsUrl = urlRoot + urlFileWeatherNow + urlkey + urlLocation + location + urlLanguage + urlUnit;
         return GetHttps(httpsUrl);
     }
     public JSONObject getWeatherDaily(String location){
-        httpsUrl = urlRoot + urlFileDaily + urlkey + urlLocation + location + urlLanguage + urlUnit + urlStart + urlDays;
+        httpsUrl = urlRoot + urlFileWeatherDaily + urlkey + urlLocation + location + urlLanguage + urlUnit + urlStart + urlDays;
         return GetHttps(httpsUrl);
     }
     public JSONObject getLifeSuggestion(String location){
         httpsUrl = urlRoot + urlFileLifeSuggestion + urlkey + urlLocation + location + urlLanguage;
         return GetHttps(httpsUrl);
     }
-
+    public JSONObject getLocationSearch(String location){
+        httpsUrl = urlRoot + urlFileLocationSearch + urlkey + urlQ + location;
+        return GetHttps(httpsUrl);
+    }
 
     /***
      * 获取数据

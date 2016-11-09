@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import com.fast.model.*;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,15 +39,15 @@ public class DetailedActivity extends AppCompatActivity {
             String str_return = "没有查询到该城市信息";
             QueryGET a = new QueryGET();
             JSONObject json;
+            JSONArray jsonArray;
             Statu statu;
             try {
-                json = a.getLifeSuggestion(city_name);
+                json = a.getLocationSearch(city_name);
                 //判断返回数据
                 if (json.has("results")) {
-                    json = json.getJSONArray("results")//获取结果
-                            .getJSONObject(0);
-                    LifeSuggestion lifeSuggestion = new LifeSuggestion(json);
-                    str_return = lifeSuggestion.toString();
+                    jsonArray = json.getJSONArray("results");
+                    LocationSearch locationSearch = new LocationSearch(jsonArray);
+                    str_return = locationSearch.toString();
                 }else if (json.has("status")){
                     statu = new Statu(json);
                     str_return = statu.toString();
