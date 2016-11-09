@@ -6,9 +6,9 @@ import org.json.JSONObject;
 /**
  * Created by 亲爱的~ on 2016/11/7.
  */
-public class Status {
+public class Statu {
     private JSONObject json;
-    public Status(JSONObject json){
+    public Statu(JSONObject json){
         this.json = json;
     }
     /***

@@ -5,10 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import com.fast.model.LifeSuggestion;
-import com.fast.model.WeatherDaily;
-import com.fast.model.WeatherNow;
+import com.fast.model.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,8 +13,6 @@ import org.json.JSONObject;
 public class DetailedActivity extends AppCompatActivity {
     private TextView text_city_name = null;
     String city_name = null;
-    String httpUrl = "https://api.thinkpage.cn/v3/weather/now.json?key=ihgy05vjoxn9kqig&location=";
-    String httpArg = "&language=zh-Hans&unit=c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +35,22 @@ public class DetailedActivity extends AppCompatActivity {
     protected class Text_set extends AsyncTask<Integer, Integer, String> {
         @Override
         protected String doInBackground(Integer... integers) {
-            String str = null;
-            String str_return = null;
+            String str_return = "没有查询到该城市信息";
             QueryGET a = new QueryGET();
             JSONObject json;
+            Statu statu;
             try {
-                json = a.getWeatherNow(city_name)
-                           .getJSONArray("results")//获取结果
-                           .getJSONObject(0);
-                str_return = json.toString();
+                json = a.getLifeSuggestion(city_name);
+                //判断返回数据
+                if (json.has("results")) {
+                    json = json.getJSONArray("results")//获取结果
+                            .getJSONObject(0);
+                    LifeSuggestion lifeSuggestion = new LifeSuggestion(json);
+                    str_return = lifeSuggestion.toString();
+                }else if (json.has("status")){
+                    statu = new Statu(json);
+                    str_return = statu.toString();
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
