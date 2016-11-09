@@ -8,21 +8,33 @@ import org.json.JSONObject;
  */
 public class Status {
     private JSONObject json;
-    private String status;
-    private String status_code;
     public Status(JSONObject json){
         this.json = json;
+    }
+    /***
+     * 格式化获取数据
+     * @param info
+     * @return
+     */
+    private String GETINFO(String info){
+        String str = null;
         try {
-            status = json.getString("status");
-            status_code = json.getString("status_code");
+            str = json.getString(info);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return str;
     }
     public String getStatus() {
-        return status;
+        return GETINFO("status");
     }
     public String getStatus_code() {
-        return status_code;
+        return GETINFO("status_code");
+    }
+    @Override
+    public String toString(){
+        String str = "status: "+getStatus()+
+                "\nstatus_code: "+getStatus_code();
+        return str;
     }
 }
