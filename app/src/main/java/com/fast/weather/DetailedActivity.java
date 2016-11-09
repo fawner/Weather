@@ -41,15 +41,17 @@ public class DetailedActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Integer... integers) {
             String str = null;
-            String str_return;
+            String str_return = null;
             QueryGET a = new QueryGET();
-            JSONObject jsonReturn;
             JSONObject json;
-            jsonReturn = a.getWeatherNow(city_name);//查询
-            str_return = jsonReturn.toString();
-            /*json = a.getWeatherNow(city_name)
-                       .getJSONArray("results")//获取结果
-                       .getJSONObject(0);*/
+            try {
+                json = a.getWeatherNow(city_name)
+                           .getJSONArray("results")//获取结果
+                           .getJSONObject(0);
+                str_return = json.toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return str_return;
         }
 
