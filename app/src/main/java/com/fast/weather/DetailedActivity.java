@@ -30,32 +30,13 @@ public class DetailedActivity extends AppCompatActivity {
 
     }
 
-    /***
+    /**
      * 异步显示查询结果
      */
     protected class Text_set extends AsyncTask<Integer, Integer, String> {
         @Override
         protected String doInBackground(Integer... integers) {
-            String str_return = "没有查询到该城市信息";
-            QueryGET a = new QueryGET();
-            JSONObject json;
-            JSONArray jsonArray;
-            Statu statu;
-            try {
-                json = a.getLocationSearch(city_name);
-                //判断返回数据
-                if (json.has("results")) {
-                    jsonArray = json.getJSONArray("results");
-                    LocationSearch locationSearch = new LocationSearch(jsonArray);
-                    str_return = locationSearch.toString();
-                }else if (json.has("status")){
-                    statu = new Statu(json);
-                    str_return = statu.toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return str_return;
+            return "return";
         }
 
         @Override
