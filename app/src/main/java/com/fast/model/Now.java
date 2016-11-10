@@ -9,17 +9,17 @@ import org.json.JSONObject;
 public class Now {
     private JSONObject json;
 
-    /***
+    /**
      * 构造 设置now数据
-     * @param json
+     * @param json jsonObject
      */
     public Now(JSONObject json){
         this.json = json;
     }
-    /***
+    /**
      * 格式化获取数据
-     * @param info
-     * @return
+     * @param info json的key
+     * @return String
      */
     private String GETINFO(String info){
         String str = null;
@@ -31,29 +31,34 @@ public class Now {
         return str;
     }
 
-    /***
+    /**
      * 获取now的text（天气）
-     * @return
+     * @return String
      */
     public String getWeatherNowText(){
         return GETINFO("text");
     }
 
-    /***
+    /**
      * 获取now的code（天气代码）
-     * @return
+     * @return String
      */
     public String getWeatherNowCode(){
         return GETINFO("code");
     }
 
-    /***
+    /**
      * 获取now的temperature（温度）
-     * @return
+     * @return String
      */
     public String getWeatherNowTemperature(){
         return GETINFO("temperature");
     }
+
+    /**
+     * 重写toStrinig
+     * @return String
+     */
     @Override
     public String toString(){
         String str = "text: "+getWeatherNowText()+

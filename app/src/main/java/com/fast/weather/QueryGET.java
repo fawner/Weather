@@ -50,24 +50,47 @@ public class QueryGET {
 
     }
 
+    /**
+     * 网络查询当前天气信息
+     * @param location 查询城市
+     * @return JSONObject
+     */
     public JSONObject getWeatherNow(String location){
         httpsUrl = urlRoot + urlFileWeatherNow + urlkey + urlLocation + location + urlLanguage + urlUnit;
         return GetHttps(httpsUrl);
     }
+
+    /**
+     * 网络查询3天天气信息
+     * @param location 查询城市
+     * @return JSONObject
+     */
     public JSONObject getWeatherDaily(String location){
         httpsUrl = urlRoot + urlFileWeatherDaily + urlkey + urlLocation + location + urlLanguage + urlUnit + urlStart + urlDays;
         return GetHttps(httpsUrl);
     }
+
+    /**
+     * 网络查询当天生活指数
+     * @param location 查询城市
+     * @return JSONObject
+     */
     public JSONObject getLifeSuggestion(String location){
         httpsUrl = urlRoot + urlFileLifeSuggestion + urlkey + urlLocation + location + urlLanguage;
         return GetHttps(httpsUrl);
     }
+
+    /**
+     * 网络获取查询城市信息
+     * @param location 查询城市
+     * @return JSONObject
+     */
     public JSONObject getLocationSearch(String location){
         httpsUrl = urlRoot + urlFileLocationSearch + urlkey + urlQ + location;
         return GetHttps(httpsUrl);
     }
 
-    /***
+    /**
      * 获取数据
      * @param httpsUrl url全地址
      * @return Json

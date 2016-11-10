@@ -14,6 +14,10 @@ public class Suggestion {
     private SuggestionTerm suggestionTermTravel;//旅游
     private SuggestionTerm suggestionTermUv;//紫外线
 
+    /**
+     * 构造
+     * @param json jsonObject
+     */
     public Suggestion(JSONObject json){
         try {
             suggestionTermCarWashing = new SuggestionTerm(json.getJSONObject("car_washing"));
@@ -26,25 +30,53 @@ public class Suggestion {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 获取洗车建议
+     * @return SuggestionTerm
+     */
     public SuggestionTerm getSuggestionTermCarWashing() {
         return suggestionTermCarWashing;
     }
+    /**
+     * 获取穿衣建议
+     * @return SuggestionTerm
+     */
     public SuggestionTerm getSuggestionTermDressing() {
         return suggestionTermDressing;
     }
+    /**
+     * 获取感冒程度
+     * @return SuggestionTerm
+     */
     public SuggestionTerm getSuggestionTermFlu() {
         return suggestionTermFlu;
     }
+    /**
+     * 获取运动建议
+     * @return SuggestionTerm
+     */
     public SuggestionTerm getSuggestionTermSport() {
         return suggestionTermSport;
     }
+    /**
+     * 获取旅游建议
+     * @return SuggestionTerm
+     */
     public SuggestionTerm getSuggestionTermTravel() {
         return suggestionTermTravel;
     }
+    /**
+     * 获取紫外线程度
+     * @return SuggestionTerm
+     */
     public SuggestionTerm getSuggestionTermUv() {
         return suggestionTermUv;
     }
-
+    /**
+     * 重写toStrinig
+     * @return String
+     */
     @Override
     public String toString(){
         String str = "car_washing: "+getSuggestionTermCarWashing().toString()+

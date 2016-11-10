@@ -11,10 +11,10 @@ public class Statu {
     public Statu(JSONObject json){
         this.json = json;
     }
-    /***
+    /**
      * 格式化获取数据
-     * @param info
-     * @return
+     * @param info json的key
+     * @return String
      */
     private String GETINFO(String info){
         String str = null;
@@ -25,12 +25,26 @@ public class Statu {
         }
         return str;
     }
+
+    /**
+     * 获取错误信息
+     * @return String
+     */
     public String getStatus() {
         return GETINFO("status");
     }
+
+    /**
+     * 获取作物信息代码
+     * @return String
+     */
     public String getStatus_code() {
         return GETINFO("status_code");
     }
+    /**
+     * 重写toStrinig
+     * @return String
+     */
     @Override
     public String toString(){
         String str = "status: "+getStatus()+

@@ -11,11 +11,17 @@ public class WeatherDaily {
     private JSONObject l;
     public JSONArray d;
     private String la;
-
+    //地址
     private Location location;
+    //天气信息
     private Daily daily;
+    //更新日期
     private LastUpdate lastUpdate;
 
+    /**
+     * 构造
+     * @param json jsonObject
+     */
     public WeatherDaily(JSONObject json){
         try {
             l = json.getJSONObject("location");
@@ -29,16 +35,32 @@ public class WeatherDaily {
         }
     }
 
+    /**
+     * 获取查询城市地址信息
+     * @return Location
+     */
     public Location getLocation(){
         return location;
     }
+
+    /**
+     * 获取查询城市天气信息
+     * @return Daily
+     */
     public Daily getDaily(){
         return daily;
     }
+    /**
+     * 获取最后更新时间
+     * @return LastUpdate
+     */
     public LastUpdate getLastUpdate(){
         return lastUpdate;
     }
-
+    /**
+     * 重写toString
+     * @return String
+     */
     @Override
     public String toString(){
         String str = "location:\n"+getLocation().toString()+

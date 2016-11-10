@@ -9,10 +9,18 @@ import org.json.JSONObject;
 public class SuggestionTerm {
     private JSONObject json;
 
+    /**
+     * 构造
+     * @param json jsonObject
+     */
     public SuggestionTerm(JSONObject json){
         this.json = json;
     }
-
+    /**
+     * 格式化获取数据
+     * @param info json的key
+     * @return String
+     */
     private String GETINFO(String info){
         String str = null;
         try {
@@ -23,12 +31,25 @@ public class SuggestionTerm {
         return str;
     }
 
+    /**
+     * 获取简单建议
+     * @return String
+     */
     public String getBrief(){
         return GETINFO("brief");
     }
+
+    /**
+     * 获取详细建议
+     * @return String
+     */
     public String getDetails(){
         return GETINFO("details");
     }
+    /**
+     * 重写toStrinig
+     * @return String
+     */
     @Override
     public String toString(){
         String str = "\nbrief: "+getBrief()+

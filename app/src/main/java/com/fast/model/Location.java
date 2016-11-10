@@ -9,17 +9,17 @@ import org.json.JSONObject;
 public class Location {
     private JSONObject json = null;
     private String str = null;
-    /***
+    /**
      *构造 设置location数据
-     * @param json
+     * @param json jsonObject
      */
     public Location(JSONObject json){
         this.json = json;
     }
-    /***
+    /**
      * 格式化获取数据
-     * @param info
-     * @return
+     * @param info json的key
+     * @return String
      */
     private String GETINFO(String info){
         try {
@@ -30,54 +30,57 @@ public class Location {
         return str;
     }
 
-    /***
+    /**
      * 获取location的id
-     * @return
+     * @return String
      */
     public String getLocationId(){
         return GETINFO("id");
     }
 
-    /***
+    /**
      * 获取location的name
-     * @return
+     * @return String
      */
     public String getLocationName(){
         return GETINFO("name");
     }
 
-    /***
+    /**
      * 获取location的country
-     * @return
+     * @return String
      */
     public String getLocationCountry(){
         return GETINFO("country");
     }
 
-    /***
+    /**
      * 获取location的path（如："北京,北京,中国"）
-     * @return
+     * @return String
      */
     public String getLocationPath(){
         return GETINFO("path");
     }
 
-    /***
+    /**
      * 获取location的timezone（如："Asia/Shanghai"）
-     * @return
+     * @return String
      */
     public String getLocationTimezone(){
         return GETINFO("timezone");
     }
 
-    /***
+    /**
      * 获取location的timezone_offset（如："+08:00"）
-     * @return
+     * @return String
      */
     public String getLocationTimezoneOffset(){
         return GETINFO("timezone_offset");
     }
-
+    /**
+     * 重写toString
+     * @return String
+     */
     @Override
     public String toString(){
         String str = "id: "+getLocationId()+
