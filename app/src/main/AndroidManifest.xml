@@ -15,9 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailedActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="今日天气"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
