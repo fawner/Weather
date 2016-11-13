@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">天气查询</string>
+    <string name="setActivity">设置</string>
+    <string name="mainActivity">天气</string>
+
+    <string name="edit_cityName_text">请输入城市名称</string>
+    <string name="send_text">确定</string>
+    <string name="CONFIGFILENAME">config</string>
 </resources>
