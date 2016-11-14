@@ -6,4 +6,6 @@
     <string name="edit_cityName_text">请输入城市名称</string>
     <string name="send_text">确定</string>
     <string name="CONFIGFILENAME">config</string>
+
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
