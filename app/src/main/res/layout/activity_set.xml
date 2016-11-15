@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorSetActivity"
     tools:context="com.fast.weather.SetActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +27,14 @@
             android:textSize="20sp"
             android:background="@drawable/rounded_send"
             android:layout_weight="2"/>
-
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/pro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+    <ListView
+        android:id="@+id/set_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>
