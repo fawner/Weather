@@ -17,6 +17,8 @@
             android:hint="@string/edit_cityName_text"
             android:paddingLeft="10dp"
             android:background="@drawable/rounded_edit"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
             android:textSize="20sp"
             android:layout_weight="1" />
         <Button

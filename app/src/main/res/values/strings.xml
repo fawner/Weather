@@ -4,8 +4,15 @@
     <string name="mainActivity">天气</string>
 
     <string name="edit_cityName_text">请输入城市名称</string>
-    <string name="send_text">确定</string>
+    <string name="send_text">查询</string>
     <string name="CONFIGFILENAME">config</string>
 
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="editText_null">请输入查询内容</string>
+
+    <string name="status_AP010006">没有权限访问这个地点</string>
+    <string name="status_AP010010">没有这个地点</string>
+    <string name="status_AP010011">无法查找到制定IP地址对应的城市</string>
+    <string name="status_AP100001">系统内部错误：数据缺失</string>
+    <string name="status_AP100002">系统内部错误：数据错误</string>
+    <string name="status_AP100003">系统内部错误：服务内部错误</string>
 </resources>

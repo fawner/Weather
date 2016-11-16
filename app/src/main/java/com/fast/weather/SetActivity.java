@@ -3,16 +3,23 @@ package com.fast.weather;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fast.model.Location;
@@ -48,7 +55,7 @@ public class SetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set);
         shared = getSharedPreferences(String.valueOf(R.string.CONFIGFILENAME), Activity.MODE_PRIVATE);
-        SharedPreferences.Editor edit = shared.edit();
+        final SharedPreferences.Editor edit = shared.edit();
 
         queryGET = new QueryGET();
 
@@ -63,21 +70,46 @@ public class SetActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                query_city_name = editText.getText().toString();
-                query_city_name = pinyin.getStringPinYin(query_city_name);
-                SetList setList = new SetList();
-                setList.execute();
+                search();
+            }
+        });
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(SetActivity.this.getCurrentFocus().getWindowToken()
+                            ,InputMethodManager.HIDE_NOT_ALWAYS);
+                    search();
+                }
+                return true;
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 set_city_id = locations[i].getLocationId();
-                Toast.makeText(SetActivity.this,set_city_id,Toast.LENGTH_SHORT).show();
+                edit.putString("setCityId",set_city_id);
+                edit.commit();
+                startActivity(new Intent(SetActivity.this,MainActivity.class));
+                finish();
             }
         });
     }
-    protected class SetList extends AsyncTask<Integer, Integer, JSONObject> {
+    private void search(){
+        query_city_name = editText.getText().toString();
+        if (query_city_name.equals("")) {
+            Toast.makeText(SetActivity.this,R.string.editText_null,Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(SetActivity.this,MainActivity.class));
+            finish();
+        }else{
+            query_city_name = pinyin.getStringPinYin(query_city_name);
+            SetList setList = new SetList();
+            setList.execute();
+        }
+
+    }
+    private class SetList extends AsyncTask<Integer, Integer, JSONObject> {
         @Override
         protected JSONObject doInBackground(Integer... integers) {
             this.publishProgress(1);
@@ -89,22 +121,22 @@ public class SetActivity extends AppCompatActivity {
                 statu = new Statu(query_json);
                 switch (statu.getStatus_code()) {
                     case "AP010006":
-                        Toast.makeText(SetActivity.this, "没有权限访问这个地点", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetActivity.this, R.string.status_AP010006, Toast.LENGTH_SHORT).show();
                         break;
                     case "AP010010":
-                        Toast.makeText(SetActivity.this, "没有这个地点", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetActivity.this, R.string.status_AP010010, Toast.LENGTH_SHORT).show();
                         break;
                     case "AP010011":
-                        Toast.makeText(SetActivity.this, "无法查找到制定IP地址对应的城市", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetActivity.this, R.string.status_AP010011, Toast.LENGTH_SHORT).show();
                         break;
                     case "AP100001":
-                        Toast.makeText(SetActivity.this, "系统内部错误：数据缺失", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetActivity.this, R.string.status_AP100001, Toast.LENGTH_SHORT).show();
                         break;
                     case "AP100002":
-                        Toast.makeText(SetActivity.this, "系统内部错误：数据错误", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetActivity.this, R.string.status_AP100002, Toast.LENGTH_SHORT).show();
                         break;
                     case "AP100003":
-                        Toast.makeText(SetActivity.this, "系统内部错误：服务内部错误", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetActivity.this, R.string.status_AP100003, Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return null;

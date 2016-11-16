@@ -1,6 +1,8 @@
 package com.fast.weather;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +18,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
+    private SharedPreferences shared;
+    private SharedPreferences.Editor edit;
+    private QueryGET queryGET;
+    private String cityId;
+    private JSONObject jsonWeatherNow;
+    private JSONObject jsonWeatherDaily;
+    private JSONObject jsonLifeSuggestion;
+    private Threaded thread;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -51,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        shared = getSharedPreferences(String.valueOf(R.string.CONFIGFILENAME), Activity.MODE_PRIVATE);
+        edit = shared.edit();
+        queryGET = new QueryGET();
+        cityId = shared.getString("setCityId","beijing");
+
+        thread = new Threaded();
+        thread.start();
     }
 
 
@@ -116,6 +136,28 @@ public class MainActivity extends AppCompatActivity {
                     return "建议";
             }
             return null;
+        }
+    }
+    private class Threaded extends Thread{
+        @Override
+        public void run() {
+            try {
+                jsonWeatherNow = queryGET.getWeatherNow(cityId)
+                        .getJSONArray("results")
+                        .getJSONObject(0);
+                jsonWeatherDaily = queryGET.getWeatherDaily(cityId)
+                        .getJSONArray("results")
+                        .getJSONObject(0);
+                jsonLifeSuggestion = queryGET.getLifeSuggestion(cityId)
+                        .getJSONArray("results")
+                        .getJSONObject(0);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            edit.putString("jsonWeatherNow",MainActivity.this.jsonWeatherNow.toString());
+            edit.putString("jsonWeatherDaily",MainActivity.this.jsonWeatherDaily.toString());
+            edit.putString("jsonLifeSuggestion",MainActivity.this.jsonLifeSuggestion.toString());
+            edit.commit();
         }
     }
 }
