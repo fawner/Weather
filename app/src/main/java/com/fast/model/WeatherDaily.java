@@ -9,7 +9,7 @@ import org.json.JSONObject;
  */
 public class WeatherDaily {
     private JSONObject l;
-    public JSONArray d;
+    private JSONArray d;
     private String la;
     //地址
     private Location location;

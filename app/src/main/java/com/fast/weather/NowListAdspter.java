@@ -12,12 +12,12 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Map;
 
-public class SetListAdspter extends BaseAdapter {
+public class NowListAdspter extends BaseAdapter {
 
     private List<Map<String, Object>> data;
     private LayoutInflater layoutInflater;
     private Context context;
-    public SetListAdspter(Context context, List<Map<String, Object>> data){
+    public NowListAdspter(Context context, List<Map<String, Object>> data){
         this.context=context;
         this.data=data;
         this.layoutInflater=LayoutInflater.from(context);
@@ -27,9 +27,8 @@ public class SetListAdspter extends BaseAdapter {
      * @author Administrator
      */
     public final class Zujian{
-        public TextView set_list_name;
-        public TextView set_list_country;
-        public TextView set_list_path;
+        public TextView now_list_title;
+        public TextView now_list_details;
     }
     @Override
     public int getCount() {
@@ -56,18 +55,16 @@ public class SetListAdspter extends BaseAdapter {
         if(convertView==null){
             zujian=new Zujian();
             //获得组件，实例化组件
-            convertView=layoutInflater.inflate(R.layout.set_list, null);
-            zujian.set_list_name = (TextView)convertView.findViewById(R.id.set_list_name);
-            zujian.set_list_country = (TextView)convertView.findViewById(R.id.set_list_country);
-            zujian.set_list_path = (TextView)convertView.findViewById(R.id.set_list_path);
+            convertView=layoutInflater.inflate(R.layout.now_list, null);
+            zujian.now_list_title = (TextView)convertView.findViewById(R.id.now_list_title);
+            zujian.now_list_details = (TextView)convertView.findViewById(R.id.now_list_details);
             convertView.setTag(zujian);
         }else{
             zujian=(Zujian)convertView.getTag();
         }
         //绑定数据
-        zujian.set_list_name.setText((String)data.get(position).get("set_list_name"));
-        zujian.set_list_country.setText((String)data.get(position).get("set_list_country"));
-        zujian.set_list_path.setText((String)data.get(position).get("set_list_path"));
+        zujian.now_list_title.setText((String)data.get(position).get("now_list_title"));
+        zujian.now_list_details.setText((String)data.get(position).get("now_list_details"));
         return convertView;
     }
 }
