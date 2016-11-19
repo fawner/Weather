@@ -110,7 +110,7 @@ public class FragmentWeatherNow extends Fragment {
                 "风力等级"
         };
         String[] str_details =  {
-                weatherDaily.getDaily().getDailyToday().getLow()+"° / "+weatherDaily.getDaily().getDailyToday().getHigh()+"°",
+                weatherDaily.getDaily().getDailyToday().getLow()+"°/ "+weatherDaily.getDaily().getDailyToday().getHigh()+"°",
                 weatherDaily.getDaily().getDailyToday().getTextDay(),
                 weatherDaily.getDaily().getDailyToday().getTextNight(),
                 weatherDaily.getDaily().getDailyToday().getWindDirection(),
@@ -177,7 +177,7 @@ public class FragmentWeatherNow extends Fragment {
         str = str.substring(0,10);
         nowTextUpdatetime.setText(str);
         nowText.setText(weatherNow.getNow().getWeatherNowText());
-        nowTextTemperature.setText(weatherNow.getNow().getWeatherNowTemperature()+" °C");
+        nowTextTemperature.setText(weatherNow.getNow().getWeatherNowTemperature()+"°C");
         nowTextCity.setText(weatherNow.getLocation().getLocationName());
         List<Map<String, Object>> list=getData();
         nowList.setAdapter(new NowListAdspter(getActivity(), list));

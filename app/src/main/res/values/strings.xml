@@ -16,5 +16,5 @@
     <string name="status_AP100002">系统内部错误：数据错误</string>
     <string name="status_AP100003">系统内部错误：服务内部错误</string>
 
-    <string name="text_fail">数据读取失败</string>
+    <string name="text_fail">数据读取失败,请重新进入应用</string>
 </resources>

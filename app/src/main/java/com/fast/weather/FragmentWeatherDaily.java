@@ -31,7 +31,6 @@ public class FragmentWeatherDaily extends Fragment {
     private TextView dailyFail;
     private ListView dailyList;
 
-
     public FragmentWeatherDaily() {
     }
 

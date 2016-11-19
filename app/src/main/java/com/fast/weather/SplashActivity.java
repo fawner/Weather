@@ -15,6 +15,7 @@ public class SplashActivity extends AppCompatActivity {
     private boolean isFirst;
     private SharedPreferences shared;
     private Intent intent;
+    private String str_cityId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +27,9 @@ public class SplashActivity extends AppCompatActivity {
         shared = getSharedPreferences(String.valueOf(R.string.CONFIGFILENAME), Activity.MODE_PRIVATE);
         SharedPreferences.Editor edit = shared.edit();
         isFirst = shared.getBoolean("isFirst",true);
+        str_cityId = shared.getString("setCityId","");
         //是否第一次进入
-        if (isFirst) {
+        if (isFirst || str_cityId.equals("")) {
             intent = new Intent(SplashActivity.this, SetActivity.class);
             edit.putBoolean("isFirst",false);
             edit.commit();

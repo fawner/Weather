@@ -71,7 +71,6 @@ public class FragmentLifeSuggestion extends Fragment {
             suggestionFail.setVisibility(View.VISIBLE);
             suggestionList.setVisibility(View.GONE);
         }
-
         return rootView;
     }
 
