@@ -31,8 +31,8 @@ public class FragmentWeatherNow extends Fragment {
     private WeatherNow weatherNow;
     private WeatherDaily weatherDaily;
     private SharedPreferences shared;
-    private JSONObject jsonNow;
 
+    private TextView nowFail;
     private ImageView nowImgWeatherCode;
     private TextView nowTextUpdatetime;
     private TextView nowTextTemperature;
@@ -58,7 +58,6 @@ public class FragmentWeatherNow extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_weather_now, container, false);
 
         shared = getActivity().getSharedPreferences(String.valueOf(R.string.CONFIGFILENAME), Activity.MODE_PRIVATE);
-        final SharedPreferences.Editor edit = shared.edit();
 
         String str_now;
         String str_daily;
@@ -68,6 +67,7 @@ public class FragmentWeatherNow extends Fragment {
             isRight = true;
         }
 
+        nowFail = (TextView)rootView.findViewById(R.id.now_fail);
         nowImgWeatherCode = (ImageView)rootView.findViewById(R.id.now_img_weather_code);
         nowTextUpdatetime = (TextView)rootView.findViewById(R.id.now_text_updatetime);
         nowTextTemperature = (TextView)rootView.findViewById(R.id.now_text_temperature);
@@ -85,7 +85,7 @@ public class FragmentWeatherNow extends Fragment {
             setDate();
 
         }else {
-
+            nowFail.setVisibility(View.VISIBLE);
             nowImgWeatherCode.setVisibility(View.GONE);
             nowTextTemperature.setVisibility(View.GONE);
             nowTextUpdatetime.setVisibility(View.GONE);
@@ -94,9 +94,6 @@ public class FragmentWeatherNow extends Fragment {
             nowListTi.setVisibility(View.GONE);
             nowList.setVisibility(View.GONE);
         }
-
-
-
         return rootView;
     }
     public List<Map<String, Object>> getData(){

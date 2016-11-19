@@ -12,7 +12,7 @@ public class Daily {
     //明天
     private DailyData dailyTomorrow;
     //后天
-    private DailyData dailtAfterTomorrow;
+    private DailyData dailyAfterTomorrow;
 
     /**
      * 构造
@@ -22,7 +22,7 @@ public class Daily {
         try {
             dailyToday = new DailyData(jsonArray.getJSONObject(0));
             dailyTomorrow = new DailyData(jsonArray.getJSONObject(1));
-            dailtAfterTomorrow = new DailyData(jsonArray.getJSONObject(2));
+            dailyAfterTomorrow = new DailyData(jsonArray.getJSONObject(2));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -46,8 +46,8 @@ public class Daily {
      * 获取后天天气的数据
      * @return DailyData对象
      */
-    public DailyData getDailtAfterTomorrow(){
-        return dailtAfterTomorrow;
+    public DailyData getDailyAfterTomorrow(){
+        return dailyAfterTomorrow;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Daily {
     public String toString(){
         String str = "Today:\n"+getDailyToday().toString()+
                 "\nTomorrow:\n"+getDailyTomorrow().toString()+
-                "\nAfterTomorrow:\n"+getDailtAfterTomorrow().toString();
+                "\nAfterTomorrow:\n"+ getDailyAfterTomorrow().toString();
         return str;
     }
 }
