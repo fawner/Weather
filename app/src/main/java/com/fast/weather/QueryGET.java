@@ -111,6 +111,9 @@ public class QueryGET {
             conn.connect();
             InputStream is = null;
             switch (conn.getResponseCode()) {
+                case HttpsURLConnection.HTTP_FORBIDDEN:
+                    is = conn.getErrorStream();
+                    break;
                 case HttpsURLConnection.HTTP_NOT_FOUND:
                     is = conn.getErrorStream();
                     break;

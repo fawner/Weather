@@ -1,6 +1,7 @@
 package com.fast.weather;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.fast.model.Statu;
 import com.fast.model.WeatherDaily;
 
 import org.json.JSONException;
@@ -59,13 +62,41 @@ public class FragmentWeatherDaily extends Fragment {
         dailyList = (ListView)rootView.findViewById(R.id.daily_list);
 
         if(isRight){
+            JSONObject jsonObject;
+            Statu statu;
             try {
-                weatherDaily = new WeatherDaily(new JSONObject(str_daily));
+                jsonObject = new JSONObject(str_daily);
+                if (jsonObject.has("status")) {
+                    statu = new Statu(jsonObject);
+                    switch (statu.getStatus_code()) {
+                        case "AP010006":
+                            Toast.makeText(getActivity(), R.string.status_AP010006+"，请重新设置城市", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "AP010010":
+                            Toast.makeText(getActivity(), R.string.status_AP010010+"，请重新设置城市", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "AP010011":
+                            Toast.makeText(getActivity(), R.string.status_AP010011+"，请重新设置城市", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "AP100001":
+                            Toast.makeText(getActivity(), R.string.status_AP100001+"，请重新设置城市", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "AP100002":
+                            Toast.makeText(getActivity(), R.string.status_AP100002+"，请重新设置城市", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "AP100003":
+                            Toast.makeText(getActivity(), R.string.status_AP100003+"，请重新设置城市", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                    startActivity(new Intent(getActivity(),SetActivity.class));
+                }else{
+                    weatherDaily = new WeatherDaily(jsonObject);
+                    setDate();
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            setDate();
-
         }else {
             dailyFail.setVisibility(View.VISIBLE);
             dailyList.setVisibility(View.GONE);

@@ -116,19 +116,9 @@ public class MainActivity extends AppCompatActivity {
     private class Threaded extends Thread{
         @Override
         public void run() {
-            try {
-                jsonWeatherNow = queryGET.getWeatherNow(cityId)
-                        .getJSONArray("results")
-                        .getJSONObject(0);
-                jsonWeatherDaily = queryGET.getWeatherDaily(cityId)
-                        .getJSONArray("results")
-                        .getJSONObject(0);
-                jsonLifeSuggestion = queryGET.getLifeSuggestion(cityId)
-                        .getJSONArray("results")
-                        .getJSONObject(0);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            jsonWeatherNow = queryGET.getWeatherNow(cityId);
+            jsonWeatherDaily = queryGET.getWeatherDaily(cityId);
+            jsonLifeSuggestion = queryGET.getLifeSuggestion(cityId);
             edit.putString("jsonWeatherNow",MainActivity.this.jsonWeatherNow.toString());
             edit.putString("jsonWeatherDaily",MainActivity.this.jsonWeatherDaily.toString());
             edit.putString("jsonLifeSuggestion",MainActivity.this.jsonLifeSuggestion.toString());
