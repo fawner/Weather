@@ -91,7 +91,7 @@ public class FragmentLifeSuggestion extends Fragment {
                     }
                     startActivity(new Intent(getActivity(),SetActivity.class));
                 }else{
-                    lifeSuggestion = new LifeSuggestion(jsonObject);
+                    lifeSuggestion = new LifeSuggestion(jsonObject.getJSONArray("results").getJSONObject(0));
                     setDate();
                 }
 

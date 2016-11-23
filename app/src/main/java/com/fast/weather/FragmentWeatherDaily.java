@@ -90,7 +90,7 @@ public class FragmentWeatherDaily extends Fragment {
                     }
                     startActivity(new Intent(getActivity(),SetActivity.class));
                 }else{
-                    weatherDaily = new WeatherDaily(jsonObject);
+                    weatherDaily = new WeatherDaily(jsonObject.getJSONArray("results").getJSONObject(0));
                     setDate();
                 }
 

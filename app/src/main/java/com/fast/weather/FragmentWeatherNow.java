@@ -107,8 +107,8 @@ public class FragmentWeatherNow extends Fragment {
                     }
                     startActivity(new Intent(getActivity(), SetActivity.class));
                 }else{
-                    weatherNow = new WeatherNow(new JSONObject(str_now));
-                    weatherDaily = new WeatherDaily(new JSONObject(str_daily));
+                    weatherNow = new WeatherNow(new JSONObject(str_now).getJSONArray("results").getJSONObject(0));
+                    weatherDaily = new WeatherDaily(new JSONObject(str_daily).getJSONArray("results").getJSONObject(0));
                     setDate();
                 }
             } catch (JSONException e) {
